@@ -81,7 +81,7 @@ export default function App() {
             setCurrentUrl(navState.url);
           }}
           keyboardDisplayRequiresUserAction={false}
-          allowsBackForwardNavigationGestures={true}
+          // allowsBackForwardNavigationGestures={true}
         />
         <StatusBar style="auto" />
       </SafeAreaView>
