@@ -4,7 +4,7 @@
     "slug": "unidorm",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/unidorm-logo-foreground.png",
+    "icon": "./assets/unidorm-logo-full.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -13,8 +13,8 @@
       "backgroundColor": "#01499A"
     },
     "ios": {
-      "bundleIdentifier": "com.hjunieee.inudormitory",
-      "buildNumber": "1.0.0",
+      "bundleIdentifier": "com.inuappcenter.unidorm",
+      "buildNumber": "1.0.2",
       "supportsTablet": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
