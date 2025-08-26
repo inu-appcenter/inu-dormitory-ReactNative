@@ -4,6 +4,11 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="android:statusBarColor">#01499A</item>
   </style>
+  <style name="AppTheme" parent="Theme.EdgeToEdge">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="android:windowLightStatusBar">true</item>
+  </style>
   <style name="Theme.App.SplashScreen" parent="AppTheme">
     <item name="android:windowBackground">@drawable/ic_launcher_background</item>
   </style>

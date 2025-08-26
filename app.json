@@ -17,13 +17,14 @@
       "buildNumber": "1.0.2",
       "supportsTablet": true,
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "UIBackgroundModes": ["remote-notification"]
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/unidorm-logo-foreground.png",
+        "backgroundColor": "#01499A"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.hjunieee.inudormitory",
@@ -31,7 +32,7 @@
       "permissions": []
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/unidorm-logo-full.png"
     },
     "extra": {
       "eas": {
