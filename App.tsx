@@ -9,18 +9,18 @@ export default function App() {
     const backPressDelay = 2000;
     const webviewRef = useRef<WebView>(null);
     const [canGoBack, setCanGoBack] = useState<boolean>(false);
-    const [currentUrl, setCurrentUrl] = useState<string>("https://inu-dormitory-web.pages.dev/home");
+    const [currentUrl, setCurrentUrl] = useState<string>("https://unidorm.inuappcenter.kr/home");
     const [previousPath, setPreviousPath] = useState<string | null>(null);
 
     // 안드로이드 하드웨어 뒤로가기 처리
     useEffect(() => {
         const onBackPress = (): boolean => {
             const exitPaths = [
-                "https://inu-dormitory-web.pages.dev/home",
-                "https://inu-dormitory-web.pages.dev/roommate",
-                "https://inu-dormitory-web.pages.dev/groupPurchase",
-                "https://inu-dormitory-web.pages.dev/chat",
-                "https://inu-dormitory-web.pages.dev/mypage",
+                "https://unidorm.inuappcenter.kr/home",
+                "https://unidorm.inuappcenter.kr/roommate",
+                "https://unidorm.inuappcenter.kr/groupPurchase",
+                "https://unidorm.inuappcenter.kr/chat",
+                "https://unidorm.inuappcenter.kr/mypage",
             ];
 
             if (exitPaths.includes(currentUrl)) {
@@ -78,12 +78,12 @@ export default function App() {
     const handleRouteChange = (url: string) => {
         const path = new URL(url).pathname;
 
-        if (previousPath === "/m/login" && path === "/m/home") {
+        if (previousPath === "/login" && path === "/home") {
             console.log("🎉 로그인 후 홈 이동 감지");
             webviewRef.current?.injectJavaScript(`
         (function() {
-          const tokenInfo = window.localStorage.getItem('tokenInfo');
-          window.ReactNativeWebView.postMessage(JSON.stringify({ tokenInfo }));
+          const accessToken = window.localStorage.getItem('accessToken');
+          window.ReactNativeWebView.postMessage(accessToken);
         })();
         true;
       `);
@@ -96,7 +96,7 @@ export default function App() {
         <SafeAreaView style={styles.container}>
             <WebView
                 ref={webviewRef}
-                source={{ uri: "https://inu-dormitory-web.pages.dev" }}
+                source={{ uri: "https://unidorm.inuappcenter.kr" }}
                 style={styles.webview}
                 onNavigationStateChange={(navState: WebViewNavigation) => {
                     setCanGoBack(navState.canGoBack);
@@ -104,23 +104,16 @@ export default function App() {
                     handleRouteChange(navState.url);
                 }}
                 onMessage={(event) => {
-                    try {
-                        const data = JSON.parse(event.nativeEvent.data);
-                        if (data.tokenInfo) {
-                            const tokenObj = JSON.parse(data.tokenInfo);
-                            if (tokenObj.accessToken) {
-                                console.log("✅ accessToken 존재:", tokenObj.accessToken.substring(0, 10), "…");
-                                issueFcmTokenAndPost();
-                            } else {
-                                console.log("⚠️ tokenInfo는 있으나 accessToken 없음");
-                            }
-                        } else {
-                            console.log("⚠️ tokenInfo 없음");
-                        }
-                    } catch (error) {
-                        console.log("❌ tokenInfo 파싱 오류:", error);
+                    const accessToken = event.nativeEvent.data; // 그냥 문자열 그대로
+
+                    if (accessToken) {
+                        console.log("✅ accessToken 존재:", accessToken.substring(0, 10), "…");
+                        issueFcmTokenAndPost();
+                    } else {
+                        console.log("⚠️ accessToken 없음");
                     }
                 }}
+
                 keyboardDisplayRequiresUserAction={false}
             />
         </SafeAreaView>
